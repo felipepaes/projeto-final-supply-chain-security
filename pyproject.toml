@@ -1,0 +1,25 @@
+[project]
+name = "python-api"
+version = "0.1.0"
+description = "Projeto Final DevSecOps Policy as Code, SBOM e Supply Chain Security"
+authors = [
+    {name = "Felipe Paes",email = "felipepaes@disroot.org"},
+]
+requires-python = "==3.13.*"
+readme = "README.md"
+license = {text = "UNLICENSE"}
+
+dependencies = ["litestar[standard]>=2.25.0"]
+
+
+[tool.pdm]
+distribution = false
+
+[dependency-groups]
+test = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
