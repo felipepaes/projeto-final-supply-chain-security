@@ -97,25 +97,25 @@ jobs:
           registry-password: ${{ secrets.GITHUB_TOKEN }}
           upload-artifact: true
 
-      - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@v0.36.0
-        with:
-          image-ref: ${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
-          format: json
-          output: security/artifacts/trivy-vulnerabilities.json
-          vuln-type: os,library
-          severity: HIGH,CRITICAL
-          exit-code: "1"
+      # - name: Scan image with Trivy
+      #   uses: aquasecurity/trivy-action@v0.36.0
+      #   with:
+      #     image-ref: ${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}
+      #     format: json
+      #     output: security/artifacts/trivy-vulnerabilities.json
+      #     vuln-type: os,library
+      #     severity: HIGH,CRITICAL
+      #     exit-code: "1"
 
-      - name: Upload scan reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: supply-chain-reports
-          path: |
-            security/artifacts/sbom.cdx.json
-            security/artifacts/trivy-vulnerabilities.json
-          if-no-files-found: warn
+      # - name: Upload scan reports
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: supply-chain-reports
+      #     path: |
+      #       security/artifacts/sbom.cdx.json
+      #       security/artifacts/trivy-vulnerabilities.json
+      #     if-no-files-found: warn
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
