@@ -11,9 +11,11 @@ Checklist binário de 5 itens, sem rubrica de 0–100:
 
 O workflow `.github/workflows/supply-chain.yml` executa os testes em pull requests e
 pushes para `main`. Em pushes, também constrói a imagem de produção, publica uma
-tag SHA no GHCR, gera um SBOM CycloneDX com Syft, assina a imagem pelo digest com
-Cosign keyless, anexa o SBOM como attestation e verifica ambos. O passo de scan
-Trivy está atualmente comentado no workflow.
+tag SHA no GHCR, gera um SBOM CycloneDX com Syft e executa o Trivy para gerar um
+relatório JSON de vulnerabilidades HIGH e CRITICAL. O scan é informativo: achados
+não falham o job (`exit-code: "0"`). O workflow publica os relatórios como artefato,
+assina a imagem pelo digest com Cosign keyless, anexa o SBOM como attestation e
+verifica ambos.
 
 O workflow usa `GITHUB_TOKEN` e OIDC do GitHub Actions; não é necessário criar uma
 API key. Os relatórios são publicados como artefato da execução. Habilite Actions
