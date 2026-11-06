@@ -22,3 +22,7 @@ Após a verificação do atestado, o workflow atualiza
 `security/artifacts/sbom.cdx.json` no branch `main` quando o conteúdo mudar. Para
 isso, o job precisa de permissão `contents: write`. Esse push com `GITHUB_TOKEN`
 não dispara outra execução do workflow.
+
+# Resultado Scan de Vulnerabilidades
+
+<img width="1849" height="797" alt="image" src="https://github.com/user-attachments/assets/efb4c13a-7073-42d2-968b-ca89271f3c70" />
