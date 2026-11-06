@@ -144,10 +144,13 @@ jobs:
             "${IMAGE_NAME}@${IMAGE_DIGEST}"
 
       - name: Verify SBOM attestation
+        timeout-minutes: 3
         env:
           IMAGE_DIGEST: ${{ steps.build.outputs.digest }}
         run: |
           cosign verify-attestation \
+            --verbose \
+            --timeout 90s \
             --type cyclonedx \
             --certificate-identity "${COSIGN_IDENTITY}" \
             --certificate-oidc-issuer "${COSIGN_OIDC_ISSUER}" \
